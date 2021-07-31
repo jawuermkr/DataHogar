@@ -20,4 +20,3 @@
         echo "No se puede acceder a la base de datos";
         exit();
     }
-?>

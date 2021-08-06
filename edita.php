@@ -32,8 +32,14 @@ $idusr = $_SESSION['idusr'];
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="dashboard.php">Inicio</a>
+                </li>
+                <li class="navbar-nav mr-auto">
                     <a class="nav-link" href="datos.php">Registros</a>
+                </li>
+                <li>
                     <a class="nav-link" href="edita.php">Editar</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="salir.php">Salir</a>
                 </li>
             </ul>
@@ -75,31 +81,136 @@ $idusr = $_SESSION['idusr'];
                         <table class="table table-striped table-bordered">
                             <thead class="thead-dark">
                                 <tr>
+                                    <th>ID</th>
                                     <th>Fecha</th>
                                     <th>Fuente</th>
                                     <th>Valor</th>
                                     <th>Detalle</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($libros as $libro) { ?>
                                     <tr>
-                                        <td><?php echo $libro['fecha']; ?></td>
-                                        <td><?php echo $libro['fuente']; ?></td>
+                                        <td><?php echo $libro['id_in']; ?></td>
                                         <td><?php echo $libro['valor']; ?></td>
+                                        <td><?php echo $libro['fuente']; ?></td>
                                         <td><?php echo $libro['detalle_i']; ?></td>
+                                        <td><?php echo $libro['fecha']; ?></td>
                                         <td>
-                                            <a class="btn btn-primary" href="#"><i><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
-                                                    </svg></i></a>
-                                            <a class="btn btn-danger" href="#"><i><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z" />
-                                                    </svg></i></a>
+
+                                            <button class="btn btn-primary" onclick="btnUpdate('<?php echo $libro['id_in']; ?>', '<?php echo $libro['valor']; ?>', '<?php echo $libro['fuente']; ?>', '<?php echo $libro['detalle_i']; ?>', '<?php echo $libro['fecha']; ?>')" data-toggle="modal" data-target="#modal"> OK</button>
+                                            <button class="btn btn-danger" onclick="btnDelete('<?php echo $libro['id_in']; ?>')" data-toggle="modal" data-target="#modald"> OK</button>
                                         </td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
                         </table>
+
+                        <!-- Modal  Actualizar -->
+                        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Actualizar</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="edita.php" method="post">
+                                            <label>ID</label>
+                                            <input class="form-control" type="text" name="id" id="id" disabled>
+                                            <label>Valor</label>
+                                            <input class="form-control" type="text" name="valor" id="ingreso">
+                                            <label>Fuente</label>
+                                            <select class="form-control" type="text" name="fuente" id="fuente">
+                                                <option value="Nómina">Nómina</option>
+                                                <option value="Independiente">Independiente</option>
+                                                <option value="Devoluciones">Devoluciones</option>
+                                                <option value="Otro">Otro</option>
+                                            </select>
+                                            <label>Detalles</label>
+                                            <input class="form-control" type="text" name="detalle_i" id="detalle">
+                                            <label>Fecha</label>
+                                            <input class="form-control" type="date" name="fecha" id="fechaIn">
+                                            <input class="form-control btn-outline-success" type="submit" name="btnA" value="Actualizar">
+                                        </form>
+                                        <?php
+                                        // INSERTAR
+                                        if (isset($_POST['btnA'])) {
+
+                                            $id = $_POST['id'];
+                                            $valor = $_POST['valor'];
+                                            $fuente = $_POST['fuente'];
+                                            $detalle_i = $_POST['detalle_i'];
+                                            $fecha = $_POST['fecha'];
+
+                                            include("abrir_conexion.php");
+
+                                            $_UPDATE_SQL = "UPDATE $tablaIngresos Set
+                                                valor = '$valor',
+                                                fuente = '$fuente',
+                                                detalle_i = '$detalle_i',
+                                                fecha = '$fecha' WHERE id_in = '$id'";
+                                        }
+                                        mysqli_query($conexion, $_UPDATE_SQL);
+                                        include("cerrar_conexion.php");
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal  Eliminar -->
+                        <div class="modal fade" id="modald" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="edita.php" method="post">
+                                            <label>Se eliminará el ID</label>
+                                            <input class="form-control" type="text" name="ide" id="idEliminar" readonly>
+                                            <input class="form-control btn-outline-danger" type="submit" name="btnE" value="Eliminar">
+                                        </form>
+                                        <?php
+                                        // ELIMINAR
+                                        if (isset($_POST['btnE'])) {
+
+                                            $id = $_POST['ide'];
+
+                                            include("abrir_conexion.php");
+
+                                            $_DELETE_SQL = "DELETE FROM $tablaIngresos WHERE id_in = '$id'";
+                                            mysqli_query($conexion, $_DELETE_SQL);
+                                        }
+                                        mysqli_query($conexion, $_UPDATE_SQL);
+                                        include("cerrar_conexion.php");
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <script>
+                            function btnUpdate(ok, un, dos, tres, cuatro) {
+                                document.getElementById('id').value = ok;
+                                document.getElementById('ingreso').value = un;
+                                document.getElementById('fuente').value = dos;
+                                document.getElementById('detalle').value = tres;
+                                document.getElementById('fechaIn').value = cuatro;
+                            }
+
+                            function btnDelete(id) {
+                                document.getElementById('idEliminar').value = id;
+                            }
+                        </script>
                     </div>
                 <?php } ?>
             </div>
@@ -132,42 +243,51 @@ $idusr = $_SESSION['idusr'];
                     include("cerrar_conexion.php");
                 ?>
 
-                    <h2>Consulta Detalles Egresos</h2>
+                    <h2>Consulta Detalles Ingresos</h2>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered">
                             <thead class="thead-dark">
                                 <tr>
+                                    <th>ID</th>
                                     <th>Fecha</th>
                                     <th>Fuente</th>
-                                    <th>Monto</th>
+                                    <th>Valor</th>
                                     <th>Detalle</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($libros as $libro) { ?>
                                     <tr>
+                                        <td id="id"><?php echo $libro['id_usr']; ?></td>
                                         <td><?php echo $libro['fecha']; ?></td>
-                                        <td><?php echo $libro['detalle_e']; ?></td>
-                                        <td><?php echo $libro['monto']; ?></td>
-                                        <td><?php echo $libro['detalles']; ?></td>
+                                        <td><?php echo $libro['fuente']; ?></td>
+                                        <td><?php echo $libro['valor']; ?></td>
+                                        <td><?php echo $libro['detalle_i']; ?></td>
                                         <td>
-                                            <a class="btn btn-primary" href="#"><i><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
-                                                    </svg></i></a>
-                                            <a class="btn btn-danger" href="#"><i><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z" />
-                                                    </svg></i></a>
+                                            <button class="btn btn-primary" onclick="btnUpdate()">edita</button>
+                                            <button class="btn btn-danger">elimina</button>
                                         </td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
                         </table>
+
+                        <script>
+                            function btnUpdate() {
+                                var id = $libro['id'];
+                                alert(id);
+                            }
+                        </script>
+
+
                     </div>
                 <?php } ?>
             </div>
         </div>
     </div>
     <br />
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>

@@ -1,9 +1,9 @@
 <?php
 
     $host = "localhost";
-    $database = "nombroj";
+    $database = "dh";
     $name = "root";
-    $clave = "V3rd4Lun01*";
+    $clave = "Bogota2021*";
 
     // Tablas
 

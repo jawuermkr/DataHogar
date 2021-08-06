@@ -23,7 +23,7 @@ $idusr = $_SESSION['idusr'];
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="dashboard.php">DataHogar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -32,8 +32,14 @@ $idusr = $_SESSION['idusr'];
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="dashboard.php">Inicio</a>
+                </li>
+                <li class="navbar-nav mr-auto">
                     <a class="nav-link" href="datos.php">Registros</a>
+                </li>
+                <li>
                     <a class="nav-link" href="edita.php">Editar</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="salir.php">Salir</a>
                 </li>
             </ul>

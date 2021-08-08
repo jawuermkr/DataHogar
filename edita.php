@@ -49,7 +49,7 @@ $idusr = $_SESSION['idusr'];
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h2>Consultar Ingresos</h2>
+                <h4>Consultar Ingresos</h4>
                 <form action="edita.php" method="post">
                     <input class="form-control" type="date" name="fecI" value="<?php echo date("Y-m-d"); ?>">
                     <input class="form-control" type="date" name="fecF" value="<?php echo date("Y-m-d"); ?>">
@@ -76,31 +76,34 @@ $idusr = $_SESSION['idusr'];
                     include("cerrar_conexion.php");
                 ?>
 
-                    <h2>Consulta Detalles Ingresos</h2>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Fecha</th>
-                                    <th>Fuente</th>
                                     <th>Valor</th>
+                                    <th>Fuente</th>
                                     <th>Detalle</th>
+                                    <th>Fecha</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($libros as $libro) { ?>
                                     <tr>
-                                        <td><?php echo $libro['id_in']; ?></td>
                                         <td><?php echo $libro['valor']; ?></td>
                                         <td><?php echo $libro['fuente']; ?></td>
                                         <td><?php echo $libro['detalle_i']; ?></td>
                                         <td><?php echo $libro['fecha']; ?></td>
                                         <td>
 
-                                            <button class="btn btn-primary" onclick="btnUpdate('<?php echo $libro['id_in']; ?>', '<?php echo $libro['valor']; ?>', '<?php echo $libro['fuente']; ?>', '<?php echo $libro['detalle_i']; ?>', '<?php echo $libro['fecha']; ?>')" data-toggle="modal" data-target="#modal"> OK</button>
-                                            <button class="btn btn-danger" onclick="btnDelete('<?php echo $libro['id_in']; ?>')" data-toggle="modal" data-target="#modald"> OK</button>
+                                            <button class="btn btn-primary" onclick="btnUpdate('<?php echo $libro['id_in']; ?>', '<?php echo $libro['fuente']; ?>', '<?php echo $libro['detalle_i']; ?>', '<?php echo $libro['fecha']; ?>')" data-toggle="modal" data-target="#modal"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+  <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+</svg></button>
+                                            
+                                            <button class="btn btn-danger" onclick="btnDelete('<?php echo $libro['id_in']; ?>', '<?php echo $libro['valor']; ?>')" data-toggle="modal" data-target="#modald"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+</svg></button>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -118,11 +121,9 @@ $idusr = $_SESSION['idusr'];
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="edita.php" method="post">
-                                            <label>ID</label>
-                                            <input class="form-control" type="text" name="id" id="id" disabled>
-                                            <label>Valor</label>
-                                            <input class="form-control" type="text" name="valor" id="ingreso">
+                                        <form action="act.php" method="post">
+                                            <p>Aquí puedes editar los detalles, si ingresaste un valor equivocado debes elimiar el registro.</p>
+                                            <input class="form-control" type="hidden" name="id" id="id">
                                             <label>Fuente</label>
                                             <select class="form-control" type="text" name="fuente" id="fuente">
                                                 <option value="Nómina">Nómina</option>
@@ -136,27 +137,6 @@ $idusr = $_SESSION['idusr'];
                                             <input class="form-control" type="date" name="fecha" id="fechaIn">
                                             <input class="form-control btn-outline-success" type="submit" name="btnA" value="Actualizar">
                                         </form>
-                                        <?php
-                                        // INSERTAR
-                                        if (isset($_POST['btnA'])) {
-
-                                            $id = $_POST['id'];
-                                            $valor = $_POST['valor'];
-                                            $fuente = $_POST['fuente'];
-                                            $detalle_i = $_POST['detalle_i'];
-                                            $fecha = $_POST['fecha'];
-
-                                            include("abrir_conexion.php");
-
-                                            $_UPDATE_SQL = "UPDATE $tablaIngresos Set
-                                                valor = '$valor',
-                                                fuente = '$fuente',
-                                                detalle_i = '$detalle_i',
-                                                fecha = '$fecha' WHERE id_in = '$id'";
-                                        }
-                                        mysqli_query($conexion, $_UPDATE_SQL);
-                                        include("cerrar_conexion.php");
-                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -172,25 +152,12 @@ $idusr = $_SESSION['idusr'];
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="edita.php" method="post">
-                                            <label>Se eliminará el ID</label>
-                                            <input class="form-control" type="text" name="ide" id="idEliminar" readonly>
+                                        <form action="act.php" method="post">
+                                            <label>Al eliminar restaremos el valor ingresado.</label>
+                                            <input class="form-control" type="hidden" name="ide" id="idEliminar" readonly>
+                                            <input class="form-control" type="text" name="valor" id="valorAc" readonly>
                                             <input class="form-control btn-outline-danger" type="submit" name="btnE" value="Eliminar">
                                         </form>
-                                        <?php
-                                        // ELIMINAR
-                                        if (isset($_POST['btnE'])) {
-
-                                            $id = $_POST['ide'];
-
-                                            include("abrir_conexion.php");
-
-                                            $_DELETE_SQL = "DELETE FROM $tablaIngresos WHERE id_in = '$id'";
-                                            mysqli_query($conexion, $_DELETE_SQL);
-                                        }
-                                        mysqli_query($conexion, $_UPDATE_SQL);
-                                        include("cerrar_conexion.php");
-                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -199,16 +166,16 @@ $idusr = $_SESSION['idusr'];
 
 
                         <script>
-                            function btnUpdate(ok, un, dos, tres, cuatro) {
+                            function btnUpdate(ok, dos, tres, cuatro) {
                                 document.getElementById('id').value = ok;
-                                document.getElementById('ingreso').value = un;
                                 document.getElementById('fuente').value = dos;
                                 document.getElementById('detalle').value = tres;
                                 document.getElementById('fechaIn').value = cuatro;
                             }
 
-                            function btnDelete(id) {
+                            function btnDelete(id, valor) {
                                 document.getElementById('idEliminar').value = id;
+                                document.getElementById('valorAc').value = valor;
                             }
                         </script>
                     </div>
@@ -216,7 +183,7 @@ $idusr = $_SESSION['idusr'];
             </div>
 
             <div class="col-md-6">
-                <h2>Consultar Engresos</h2>
+                <h4>Consultar Engresos</h4>
                 <form action="edita.php" method="post">
                     <input class="form-control" type="date" name="fecI" value="<?php echo date("Y-m-d"); ?>">
                     <input class="form-control" type="date" name="fecF" value="<?php echo date("Y-m-d"); ?>">
@@ -243,44 +210,37 @@ $idusr = $_SESSION['idusr'];
                     include("cerrar_conexion.php");
                 ?>
 
-                    <h2>Consulta Detalles Ingresos</h2>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Fecha</th>
-                                    <th>Fuente</th>
                                     <th>Valor</th>
                                     <th>Detalle</th>
+                                    <th>Observación</th>
+                                    <th>Fecha</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($libros as $libro) { ?>
                                     <tr>
-                                        <td id="id"><?php echo $libro['id_usr']; ?></td>
+                                        <td><?php echo $libro['monto']; ?></td>
+                                        <td><?php echo $libro['detalle_e']; ?></td>
+                                        <td><?php echo $libro['detalles']; ?></td>
                                         <td><?php echo $libro['fecha']; ?></td>
-                                        <td><?php echo $libro['fuente']; ?></td>
-                                        <td><?php echo $libro['valor']; ?></td>
-                                        <td><?php echo $libro['detalle_i']; ?></td>
                                         <td>
-                                            <button class="btn btn-primary" onclick="btnUpdate()">edita</button>
-                                            <button class="btn btn-danger">elimina</button>
+                                            <button class="btn btn-secondary" onclick="btnUpdate()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+  <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+</svg></button>
+                                            <button class="btn btn-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+</svg></button>
                                         </td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
                         </table>
-
-                        <script>
-                            function btnUpdate() {
-                                var id = $libro['id'];
-                                alert(id);
-                            }
-                        </script>
-
-
                     </div>
                 <?php } ?>
             </div>

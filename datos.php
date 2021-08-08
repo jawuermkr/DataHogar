@@ -49,11 +49,12 @@ $idusr = $_SESSION['idusr'];
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h2>Registro Ingresos</h2>
+                <h4>Registro Ingresos</h4>
                 <canvas id="chartIn" width="100%" height="100%"></canvas>
             </div>
+            <div class="col-md-12"><hr></div>
             <div class="col-md-6">
-                <h2>Registro Egresos</h2>
+                <h4>Registro Egresos</h4>
                 <canvas id="chartEg" width="100%" height="100%"></canvas>
             </div>
 
@@ -130,7 +131,7 @@ $idusr = $_SESSION['idusr'];
 
         var ctx = document.getElementById("chartIn").getContext("2d");
         var chartIn = new Chart(ctx, {
-            type: "bar",
+            type: "polarArea",
             data: {
                 labels: ['Nomina', 'Independiente', 'Devoluciones', 'Otro'],
                 datasets: [{
@@ -156,7 +157,7 @@ $idusr = $_SESSION['idusr'];
 
         var ctxe = document.getElementById("chartEg").getContext("2d");
         var chartEg = new Chart(ctxe, {
-            type: "bar",
+            type: "polarArea",
             data: {
                 labels: ['Hogar', 'Alimentación', 'Vestuario', 'Estudio', 'Inversión', 'Prestamo', 'Otro'],
                 datasets: [{

@@ -88,8 +88,8 @@ if ($_SESSION['correcto'] <> 1) {
                 <hr>
                 <h2>Ingresos</h2>
                 <form action="dashboard.php" method="post">
-                    <input class="form-control" type="text" name="ingreso" placeholder="Valor Ingresos">
-                    <select class="form-control" type="text" name="fuente">
+                    <input class="form-control" type="text" name="ingreso" placeholder="Valor Ingresos" required>
+                    <select class="form-control" type="text" name="fuente" required>
                         <option value="" selected="true" disabled="disabled">Seleccione Motivo</option>
                         <option value="Nómina">Nómina</option>
                         <option value="Independiente">Independiente</option>
@@ -139,8 +139,8 @@ if ($_SESSION['correcto'] <> 1) {
                 </form>
                 <h2>Egresos</h2>
                 <form action="dashboard.php" method="post">
-                    <input class="form-control" type="text" name="gasto" placeholder="Valor Egresos">
-                    <select class="form-control" type="text" name="fuenteg">
+                    <input class="form-control" type="text" name="gasto" placeholder="Valor Egresos" required>
+                    <select class="form-control" type="text" name="fuenteg" required>
                         <option value="" selected="true" disabled="disabled">Seleccione Motivo</option>
                         <option value="Hogar">Hogar</option>
                         <option value="Alimentación">Alimentación</option>

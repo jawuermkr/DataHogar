@@ -23,7 +23,7 @@ $idusr = $_SESSION['idusr'];
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="dashboard.php">DataHogar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -49,11 +49,12 @@ $idusr = $_SESSION['idusr'];
     <div class="container">
         <div class="row">
             <div class="col-md-6">
+                </br>
                 <h4>Registro Ingresos</h4>
                 <canvas id="chartIn" width="100%" height="100%"></canvas>
             </div>
-            <div class="col-md-12"><hr></div>
             <div class="col-md-6">
+                </br>
                 <h4>Registro Egresos</h4>
                 <canvas id="chartEg" width="100%" height="100%"></canvas>
             </div>

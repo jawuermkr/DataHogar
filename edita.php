@@ -183,7 +183,7 @@ $idusr = $_SESSION['idusr'];
             </div>
 
             <div class="col-md-6">
-                <h4>Consultar Engresos</h4>
+                <h4>Consultar Egresos</h4>
                 <form action="edita.php" method="post">
                     <input class="form-control" type="date" name="fecI" value="<?php echo date("Y-m-d"); ?>">
                     <input class="form-control" type="date" name="fecF" value="<?php echo date("Y-m-d"); ?>">

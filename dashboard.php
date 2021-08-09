@@ -72,7 +72,8 @@ if ($_SESSION['correcto'] <> 1) {
     <div class="container">
         <div class="row">
             <div class="col-md-12"><br />
-                <p>Usuario activo: <?php echo "<b>" . $_SESSION['nomo'] . "</b>"; ?></p>
+                <?php $user = $_SESSION['nomo']; ?>
+                <p>Usuario activo: <?php echo "<b>" . $user . "</b>"; ?></p>
                 <hr>
                 <?php
                 include("abrir_conexion.php");

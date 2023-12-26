@@ -3,7 +3,7 @@
     $host = "localhost";
     $database = "dh";
     $name = "root";
-    $clave = "Bogota2021*";
+    $clave = "";
 
     // Tablas
 
@@ -11,6 +11,7 @@
     $tablaIngresos = "ingresos";
     $tablaEgresos = "egresos";
     $tablaTotal = "total";
+    $tablaOpciones = "opciones";
 
     error_reporting(1);
 

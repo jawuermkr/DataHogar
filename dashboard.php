@@ -59,6 +59,9 @@ if ($_SESSION['correcto'] <> 1) {
                 <li class="navbar-nav mr-auto">
                     <a class="nav-link" href="datos.php">Registros</a>
                 </li>
+                <li class="navbar-nav mr-auto">
+                    <a class="nav-link" href="opciones.php">Opciones</a>
+                </li>
                 <li>
                     <a class="nav-link" href="edita.php">Editar</a>
                 </li>
@@ -86,16 +89,32 @@ if ($_SESSION['correcto'] <> 1) {
                 }
                 ?>
                 <hr>
-                <h2>Ingresos</h2>
+            </div>
+            <div class="col-md-6"><br />
+                <h2 class="mt-3">Ingresos</h2>
                 <form action="dashboard.php" method="post">
                     <input class="form-control" type="text" name="ingreso" placeholder="Valor Ingresos" required>
-                    <select class="form-control" type="text" name="fuente" required>
+
+                    <select class="form-control" name="cod_c">
                         <option value="" selected="true" disabled="disabled">Seleccione Motivo</option>
                         <option value="Nómina">Nómina</option>
-                        <option value="Independiente">Independiente</option>
-                        <option value="Devoluciones">Devoluciones</option>
-                        <option value="Otro">Otro</option>
+                        <?php
+                            include("abrir_conexion.php");
+                            $resultados = mysqli_query($conexion,"SELECT * FROM $tablaOpciones WHERE id_usr = '$iduser'");
+                            while ($consulta=mysqli_fetch_array($resultados)){
+                                $formulario = $consulta['formulario'];
+                                $opcion = $consulta['opcion'];
+                            if($formulario == 'Ingresos'){
+                        ?>
+                            <option value="<?php echo $opcion ?>"><?php echo $opcion ?></option>
+                            
+                            <?php
+                            }
+                        }
+                        include("cerrar_conexion.php");
+                        ?>
                     </select>
+
                     <input class="form-control" type="text" name="detalle" placeholder="Detalles">
                     <input class="form-control" type="date" name="fechIn" value="<?php echo date('Y-m-d'); ?>">
                     <input class="form-control btn-outline-success" type="submit" name="btn-in" value="Actualizar">
@@ -137,18 +156,29 @@ if ($_SESSION['correcto'] <> 1) {
                     ?>
 
                 </form>
-                <h2>Egresos</h2>
+                </div>
+                <div class="col-md-6"><br />
+                <h2 class="mt-3">Egresos</h2>
                 <form action="dashboard.php" method="post">
                     <input class="form-control" type="text" name="gasto" placeholder="Valor Egresos" required>
-                    <select class="form-control" type="text" name="fuenteg" required>
+                    <select class="form-control" name="cod_c">
                         <option value="" selected="true" disabled="disabled">Seleccione Motivo</option>
-                        <option value="Hogar">Hogar</option>
                         <option value="Alimentación">Alimentación</option>
-                        <option value="Vestuario">Vestuario</option>
-                        <option value="Estudio">Estudio</option>
-                        <option value="Inversión">Inversión</option>
-                        <option value="Prestamos">Prestamos</option>
-                        <option value="Otro">Otro</option>
+                        <?php
+                            include("abrir_conexion.php");
+                            $resultados = mysqli_query($conexion,"SELECT * FROM $tablaOpciones WHERE id_usr = '$iduser'");
+                            while ($consulta=mysqli_fetch_array($resultados)){
+                                $formulario = $consulta['formulario'];
+                                $opcion = $consulta['opcion'];
+                            if($formulario == 'Egresos'){
+                        ?>
+                            <option value="<?php echo $opcion ?>"><?php echo $opcion ?></option>
+                            
+                            <?php
+                            }
+                        }
+                        include("cerrar_conexion.php");
+                        ?>
                     </select>
                     <input class="form-control" type="text" name="razon" placeholder="Detalles">
                     <input class="form-control" type="date" name="fechOut" value="<?php echo date('Y-m-d'); ?>">
@@ -186,6 +216,7 @@ if ($_SESSION['correcto'] <> 1) {
                     }
                     ?>
                 </form>
+                </div>
             </div>
         </div>
     </div>

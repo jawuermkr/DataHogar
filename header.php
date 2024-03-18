@@ -4,7 +4,7 @@ session_start();
 ob_start();
 
 if ($_SESSION['correcto'] <> 1) {
-  header('Location:salir.php');
+    header('Location:salir.php');
 }
 
 $idusr = $_SESSION['idusr'];
@@ -33,9 +33,6 @@ $idusr = $_SESSION['idusr'];
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="dashboard.php">Inicio</a>
-                </li>
-                <li class="navbar-nav mr-auto">
-                    <a class="nav-link" href="datos.php">Registros</a>
                 </li>
                 <li class="navbar-nav mr-auto">
                     <a class="nav-link" href="opciones.php">Opciones</a>

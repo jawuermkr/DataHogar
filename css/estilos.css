@@ -9,24 +9,36 @@
     padding: 0px;
     margin: 0px;
 }
-nav{
-    background: #383838 !important;
+
+nav {
+    background: #f1f1f1 !important;
+    color: #383838 !important;
 }
+
 .nav-link {
-    color: rgb(148, 148, 148) !important;
+    color: rgb(31, 31, 31) !important;
 }
-.navbar-light .navbar-brand{
-    color:rgb(255, 255, 255) !important;
+
+.navbar-light .navbar-brand {
+    color: rgb(77, 77, 77) !important;
 }
+
 .login {
-    text-align:center;
-    margin:20% 0% 0% 0%;
+    text-align: center;
+    margin: 20% 0% 0% 0%;
 }
+
 .login img {
-    width:90%;
+    width: 90%;
 }
+
 .nombro {
-    color:#35a700;
+    color: #35a700;
     text-align: center;
     font-size: 54px;
+}
+
+footer {
+    background-color: #f1f1f1;
+    color: #383838;
 }

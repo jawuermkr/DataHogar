@@ -20,6 +20,7 @@ if (isset($_POST['btnIni'])) {
 
             $_SESSION['correcto'] = 1;
             $_SESSION['nomo'] = $consulta['nombres'];
+            $_SESSION['fnomo'] = $consulta['apellidos'];
             $_SESSION['idusr'] = $consulta['id_usr'];
         }
 
@@ -57,9 +58,6 @@ if ($_SESSION['correcto'] <> 1) {
                     <a class="nav-link" href="dashboard.php">Inicio</a>
                 </li>
                 <li class="navbar-nav mr-auto">
-                    <a class="nav-link" href="datos.php">Registros</a>
-                </li>
-                <li class="navbar-nav mr-auto">
                     <a class="nav-link" href="opciones.php">Opciones</a>
                 </li>
                 <li>
@@ -75,8 +73,11 @@ if ($_SESSION['correcto'] <> 1) {
     <div class="container">
         <div class="row">
             <div class="col-md-12"><br />
-                <?php $user = $_SESSION['nomo']; ?>
-                <p>Usuario activo: <?php echo "<b>" . $user . "</b>"; ?></p>
+                <?php
+                $user = $_SESSION['nomo'];
+                $fuser = $_SESSION['fnomo'];
+                ?>
+                <p>Usuario activo: <?php echo "<b>" . $user . " " . $fuser . "</b>"; ?></p>
                 <hr>
                 <?php
                 include("abrir_conexion.php");
@@ -95,20 +96,20 @@ if ($_SESSION['correcto'] <> 1) {
                 <form action="dashboard.php" method="post">
                     <input class="form-control" type="text" name="ingreso" placeholder="Valor Ingresos" required>
 
-                    <select class="form-control" name="cod_c">
+                    <select class="form-control" name="fuente">
                         <option value="" selected="true" disabled="disabled">Seleccione Motivo</option>
                         <option value="Nómina">Nómina</option>
                         <?php
-                            include("abrir_conexion.php");
-                            $resultados = mysqli_query($conexion,"SELECT * FROM $tablaOpciones WHERE id_usr = '$iduser'");
-                            while ($consulta=mysqli_fetch_array($resultados)){
-                                $formulario = $consulta['formulario'];
-                                $opcion = $consulta['opcion'];
-                            if($formulario == 'Ingresos'){
+                        include("abrir_conexion.php");
+                        $resultados = mysqli_query($conexion, "SELECT * FROM $tablaOpciones WHERE id_usr = '$iduser'");
+                        while ($consulta = mysqli_fetch_array($resultados)) {
+                            $formulario = $consulta['formulario'];
+                            $opcion = $consulta['opcion'];
+                            if ($formulario == 'Ingresos') {
                         ?>
-                            <option value="<?php echo $opcion ?>"><?php echo $opcion ?></option>
-                            
-                            <?php
+                                <option value="<?php echo $opcion ?>"><?php echo $opcion ?></option>
+
+                        <?php
                             }
                         }
                         include("cerrar_conexion.php");
@@ -156,25 +157,25 @@ if ($_SESSION['correcto'] <> 1) {
                     ?>
 
                 </form>
-                </div>
-                <div class="col-md-6"><br />
+            </div>
+            <div class="col-md-6"><br />
                 <h2 class="mt-3">Egresos</h2>
                 <form action="dashboard.php" method="post">
                     <input class="form-control" type="text" name="gasto" placeholder="Valor Egresos" required>
-                    <select class="form-control" name="cod_c">
+                    <select class="form-control" name="fuenteg">
                         <option value="" selected="true" disabled="disabled">Seleccione Motivo</option>
                         <option value="Alimentación">Alimentación</option>
                         <?php
-                            include("abrir_conexion.php");
-                            $resultados = mysqli_query($conexion,"SELECT * FROM $tablaOpciones WHERE id_usr = '$iduser'");
-                            while ($consulta=mysqli_fetch_array($resultados)){
-                                $formulario = $consulta['formulario'];
-                                $opcion = $consulta['opcion'];
-                            if($formulario == 'Egresos'){
+                        include("abrir_conexion.php");
+                        $resultados = mysqli_query($conexion, "SELECT * FROM $tablaOpciones WHERE id_usr = '$iduser'");
+                        while ($consulta = mysqli_fetch_array($resultados)) {
+                            $formulario = $consulta['formulario'];
+                            $opcion = $consulta['opcion'];
+                            if ($formulario == 'Egresos') {
                         ?>
-                            <option value="<?php echo $opcion ?>"><?php echo $opcion ?></option>
-                            
-                            <?php
+                                <option value="<?php echo $opcion ?>"><?php echo $opcion ?></option>
+
+                        <?php
                             }
                         }
                         include("cerrar_conexion.php");
@@ -216,14 +217,10 @@ if ($_SESSION['correcto'] <> 1) {
                     }
                     ?>
                 </form>
-                </div>
             </div>
         </div>
     </div>
+    </div>
     <br />
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-</body>
 
-</html>
+    <?php include("footer.php"); ?>
